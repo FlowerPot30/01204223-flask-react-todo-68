@@ -21,9 +21,12 @@ function TodoItem({todo, toggleDone, deleteTodo, addNewComment}) {
             >
                 ❌
             </button>
+            {todo.comments && todo.comments.length === 0 && (
+                <p>No comments</p>
+            )}
             {todo.comments && todo.comments.length > 0 && (
                 <>
-                <b>Comments:</b>
+                <b>Comments: ({todo.comments.length})</b>
                 <ul>
                     {todo.comments.map((comment) => (
                     <li key={comment.id}>{comment.message}</li>
@@ -37,7 +40,7 @@ function TodoItem({todo, toggleDone, deleteTodo, addNewComment}) {
                     value={newComment}
                     onChange={(e) => {
                         const value = e.target.value;
-                        setNewComments(value);
+                        setNewComment(value);
                     }}
                 />
                 <button
