@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import TodoItem from "./TodoItem.jsx";
 import LoginForm from "./LoginForm.jsx";
+import TodoList from "./TodoList.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
 function App() {
@@ -13,7 +16,14 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<TodoList apiUrl={TODOLIST_API_URL} />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <TodoList apiUrl={TODOLIST_API_URL} />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/about"
             element={

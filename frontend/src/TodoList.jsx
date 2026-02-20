@@ -137,6 +137,7 @@ function TodoList({ apiUrl }) {
       <br />
       <a href="/about">About</a>
       <br />
+      <a href="/login">Login</a>
       {username && (
         <a
           href="#"
