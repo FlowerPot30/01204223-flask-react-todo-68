@@ -5,7 +5,7 @@ import click
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from flask_jwt_extended import JWTManager
 
-from models import TodoItem, Comment, db
+from models import TodoItem, Comment, User, db
 
 app = Flask(__name__)
 CORS(app)   
