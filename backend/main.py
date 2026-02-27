@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 import click
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from flask_jwt_extended import JWTManager
-
+import os
 from models import TodoItem, Comment, User, db
 
 app = Flask(__name__)
@@ -21,8 +21,9 @@ todo_list = [
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "todos.db")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI','sqlite:///todos.db') 
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY','fdslkfjsdlkufewhjroiewurewrew')
+
 migrate = Migrate(app, db)                               # บรรทัดที่เรียก Migrate (ต้องหลังสร้าง app และ db)
 
 db.init_app(app)   
@@ -111,7 +112,7 @@ def login():
         return jsonify({'error': 'Invalid username or password'}), 401
 
     access_token = create_access_token(identity=user.username)
-    return jsonify({'message': 'Login successful'})
+    return jsonify(access_token=access_token)
 
 app.config['JWT_SECRET_KEY'] = 'fdsjkfjioi2rjshr2345hrsh043j5oij5545'
 jwt = JWTManager(app)

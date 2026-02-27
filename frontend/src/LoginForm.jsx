@@ -6,7 +6,6 @@ import "./App.css";
 function LoginForm({ loginUrl }) {
   const navigate = useNavigate();
   const { login, username: loggedInUsername } = useAuth();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
